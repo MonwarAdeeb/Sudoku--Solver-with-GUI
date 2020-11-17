@@ -38,3 +38,11 @@ class Grid:
             if self.cubes[row][col].value == 0:
                 self.cubes[row][col].set(val)
                 self.update_model()
+
+                if valid(self.model, val, (row, col)) and self.solve():
+                    return True
+                else:
+                    self.cubes[row][col].set(0)
+                    self.cubes[row][col].set_temp(0)
+                    self.update_model()
+                    return False
