@@ -32,3 +32,9 @@ class Grid:
         def update_model(self):
             self.model = [[self.cubes[i][j].value for j in range(
                 self.cols)] for i in range(self.rows)]
+
+        def place(self, val):
+            row, col = self.selected
+            if self.cubes[row][col].value == 0:
+                self.cubes[row][col].set(val)
+                self.update_model()
