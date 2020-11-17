@@ -46,3 +46,7 @@ class Grid:
                     self.cubes[row][col].set_temp(0)
                     self.update_model()
                     return False
+
+    def sketch(self, val):
+        row, col = self.selected
+        self.cubes[row][col].set_temp(val)
