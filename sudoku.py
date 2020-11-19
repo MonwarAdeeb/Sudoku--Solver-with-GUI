@@ -68,3 +68,12 @@ class Grid:
         for i in range(self.rows):
             for j in range(self.cols):
                 self.cubes[i][j].draw(self.win)
+
+        def select(self, row, col):
+            # Reset all other
+            for i in range(self.rows):
+                for j in range(self.cols):
+                    self.cubes[i][j].selected = False
+
+            self.cubes[row][col].selected = True
+            self.selected = (row, col)
