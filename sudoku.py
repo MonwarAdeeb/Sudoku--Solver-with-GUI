@@ -74,6 +74,7 @@ class Grid:
         for i in range(self.rows):
             for j in range(self.cols):
                 self.cubes[i][j].selected = False
+
         self.cubes[row][col].selected = True
         self.selected = (row, col)
 
@@ -87,10 +88,17 @@ class Grid:
         :param: pos
         :return: (row, col)
         """
-        if pos[0] < self.width and pos[i] < self.height:
+        if pos[0] < self.width and pos[1] < self.height:
             gap = self.width / 9
             x = pos[0] // gap
             y = pos[1] // gap
             return (int(y), int(x))
         else:
             return None
+
+    def is_finished(self):
+        for in range(self.rows):
+            for j in range(self.cols):
+                if self.cubes[i][j].value == 0:
+                    return False
+        return True
