@@ -128,3 +128,12 @@ class Grid:
             return True
         else:
             row, col = find
+
+        for i in range(1, 10):
+            if valid(self.model, i, (row, col)):
+                self.model[row][col] = i
+                self.cubes[row][col].set(i)
+                self.cubes[row][col].draw_change(self.win, True)
+                self.update_model()
+                pygame.display.update()
+                pygame.time.delay(100)
