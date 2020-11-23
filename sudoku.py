@@ -170,3 +170,11 @@ class Cube:
         gap = self.width / 9
         x = self.col * gap
         y = self.row * gap
+
+        if self.temp != 0 and self.value == 0:
+            text = fnt.render(str(self.temp), 1, (128, 128, 128))
+            win.blit(text, (x+5, y+5))
+        elif not(self.value == 0):
+            text = fnt.render(str(self.value), 1, (0, 0, 0))
+            win.blit(text, (x + (gap/2 - text.get_width()/2),
+                            y + (gap/2 - text.get_height()/2)))
