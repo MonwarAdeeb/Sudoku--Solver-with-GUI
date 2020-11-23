@@ -149,3 +149,8 @@ class Grid:
                 pygame.time.delay(100)
 
         return False
+
+
+class Cube:
+    rows = 9
+    cols = 9
