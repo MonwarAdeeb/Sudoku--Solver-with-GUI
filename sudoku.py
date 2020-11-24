@@ -201,3 +201,6 @@ class Cube:
 
     def set(self, val):
         self.value = val
+
+    def set_temp(self, val):
+        self.temp = val
