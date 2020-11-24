@@ -181,3 +181,12 @@ class Cube:
 
         if self.selected:
             pygame.draw.rect(win, (255, 0, 0), (x, y, gap, gap), 3)
+
+    def draw_changes(self, win, g=True):
+        fnt = pygame.font.SysFont("comicsans", 40)
+
+        gap = self.width / 9
+        x = self.col * gap
+        y = self.row * gap
+
+        pygame.draw.rect(win, (255, 255, 255), (x, y, gap, gap), 0)
