@@ -249,3 +249,12 @@ def redraw_window(win, board, time, strikes):
     win.blit(text, (20, 560))
     # Draw grid and board
     board.draw()
+
+
+def format_time(secs):
+    sec = secs % 60
+    minute = secs//60
+    hour = minute//60
+
+    mat = " " + str(minute) + ":" + str(sec)
+    return mat
