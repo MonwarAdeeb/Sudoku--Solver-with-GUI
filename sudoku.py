@@ -268,3 +268,11 @@ def main():
     run = True
     start = time.time()
     strikes = 0
+
+    while run:
+
+        play_time = round(time.time() - start)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
