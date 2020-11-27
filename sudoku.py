@@ -319,3 +319,13 @@ def main():
 
                 if event.key == pygame.K_SPACE:
                     board.solve_gui()
+
+                if event.key == pygame.K_RETURN:
+                    i, j = board.selected
+                    if board.cubes[i][j].temp != 0:
+                        if board.place(board.cubes[i][j].temp):
+                            print("Success")
+                        else:
+                            print("Wrong")
+                            strikes += 1
+                        key = None
