@@ -329,6 +329,3 @@ def main():
                             print("Wrong")
                             strikes += 1
                         key = None
-
-                        if board.is_finished():
-                            print("Game over")
