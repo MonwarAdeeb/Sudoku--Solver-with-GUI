@@ -316,3 +316,6 @@ def main():
                 if event.key == pygame.K_DELETE:
                     board.clear()
                     key = None
+
+                if event.key == pygame.K_SPACE:
+                    board.solve_gui()
