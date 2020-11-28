@@ -1,4 +1,4 @@
-# sudoku.py
+# GUI.py
 import pygame
 import time
 pygame.font.init()
@@ -29,23 +29,23 @@ class Grid:
         self.selected = None
         self.win = win
 
-        def update_model(self):
-            self.model = [[self.cubes[i][j].value for j in range(
-                self.cols)] for i in range(self.rows)]
+    def update_model(self):
+        self.model = [[self.cubes[i][j].value for j in range(
+            self.cols)] for i in range(self.rows)]
 
-        def place(self, val):
-            row, col = self.selected
-            if self.cubes[row][col].value == 0:
-                self.cubes[row][col].set(val)
+    def place(self, val):
+        row, col = self.selected
+        if self.cubes[row][col].value == 0:
+            self.cubes[row][col].set(val)
+            self.update_model()
+
+            if valid(self.model, val, (row, col)) and self.solve():
+                return True
+            else:
+                self.cubes[row][col].set(0)
+                self.cubes[row][col].set_temp(0)
                 self.update_model()
-
-                if valid(self.model, val, (row, col)) and self.solve():
-                    return True
-                else:
-                    self.cubes[row][col].set(0)
-                    self.cubes[row][col].set_temp(0)
-                    self.update_model()
-                    return False
+                return False
 
     def sketch(self, val):
         row, col = self.selected
@@ -59,7 +59,7 @@ class Grid:
                 thick = 4
             else:
                 thick = 1
-            pygame.draw.line(self.win, (0, 0, 0)(0, i*gap),
+            pygame.draw.line(self.win, (0, 0, 0), (0, i*gap),
                              (self.width, i*gap), thick)
             pygame.draw.line(self.win, (0, 0, 0), (i * gap, 0),
                              (i * gap, self.height), thick)
@@ -78,7 +78,7 @@ class Grid:
         self.cubes[row][col].selected = True
         self.selected = (row, col)
 
-    def clear(self, pos):
+    def clear(self):
         row, col = self.selected
         if self.cubes[row][col].value == 0:
             self.cubes[row][col].set_temp(0)
@@ -97,7 +97,7 @@ class Grid:
             return None
 
     def is_finished(self):
-        for in range(self.rows):
+        for i in range(self.rows):
             for j in range(self.cols):
                 if self.cubes[i][j].value == 0:
                     return False
@@ -141,7 +141,7 @@ class Grid:
                 if self.solve_gui():
                     return True
 
-                self.model[row][column] = 0
+                self.model[row][col] = 0
                 self.cubes[row][col].set(0)
                 self.update_model()
                 self.cubes[row][col].draw_change(self.win, False)
@@ -165,7 +165,7 @@ class Cube:
         self.selected = False
 
     def draw(self, win):
-        fnt = pygame.font.Sysfont("comicsans", 40)
+        fnt = pygame.font.SysFont("comicsans", 40)
 
         gap = self.width / 9
         x = self.col * gap
@@ -182,7 +182,7 @@ class Cube:
         if self.selected:
             pygame.draw.rect(win, (255, 0, 0), (x, y, gap, gap), 3)
 
-    def draw_changes(self, win, g=True):
+    def draw_change(self, win, g=True):
         fnt = pygame.font.SysFont("comicsans", 40)
 
         gap = self.width / 9
@@ -333,15 +333,19 @@ def main():
                         if board.is_finished():
                             print("Game over")
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 clicked = board.click(pos)
                 if clicked:
                     board.select(clicked[0], clicked[1])
                     key = None
 
-            if board.selected and key != None:
+        if board.selected and key != None:
             board.sketch(key)
 
         redraw_window(win, board, play_time, strikes)
         pygame.display.update()
+
+
+main()
+pygame.quit()
