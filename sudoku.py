@@ -329,3 +329,13 @@ def main():
                             print("Wrong")
                             strikes += 1
                         key = None
+
+                        if board.is_finished():
+                            print("Game over")
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                clicked = board.click(pos)
+                if clicked:
+                    board.select(clicked[0], clicked[1])
+                    key = None
