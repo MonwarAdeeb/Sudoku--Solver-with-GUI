@@ -339,3 +339,9 @@ def main():
                 if clicked:
                     board.select(clicked[0], clicked[1])
                     key = None
+
+            if board.selected and key != None:
+            board.sketch(key)
+
+        redraw_window(win, board, play_time, strikes)
+        pygame.display.update()
